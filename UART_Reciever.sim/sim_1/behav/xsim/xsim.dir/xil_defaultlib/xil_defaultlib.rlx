@@ -1,0 +1,7 @@
+0.7
+2020.2
+Oct 13 2023
+20:47:58
+D:/FPGA_Projects/UART_Reciever/UART_Reciever.sim/sim_1/behav/xsim/glbl.v,1697210495,verilog,,,,glbl,,,,,,,,
+D:/FPGA_Projects/UART_Reciever/UART_Reciever.srcs/sim_1/new/UART_RX_TB.v,1719366255,verilog,,,,UART_RX_TB,,,,,,,,
+D:/FPGA_Projects/UART_Reciever/UART_Reciever.srcs/sources_1/new/UART_RX.v,1719364487,verilog,,D:/FPGA_Projects/UART_Reciever/UART_Reciever.srcs/sim_1/new/UART_RX_TB.v,,UART_RX,,,,,,,,

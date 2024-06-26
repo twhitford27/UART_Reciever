@@ -25,10 +25,10 @@ module UART_RX #(parameter CLKS_PER_BIT = 104)
         //inputs
         input           clk,
         input           rst,
-        input           UART_RX,
+        input           UART_RX_IN,
 
         //outputs
-        output [7:0]    RX_data,
+        output [7:0]    RX_DATA,
         output          RX_DV
     );
 
@@ -56,7 +56,7 @@ module UART_RX #(parameter CLKS_PER_BIT = 104)
                     RX_REG_DV = 1'b0;
                     BIT_CLK_COUNT = 0;
                     BIT_INDEX = 0;
-                    if (UART_RX == 1'b0)begin
+                    if (UART_RX_IN == 1'b0)begin
                         STATE <= START_BIT;
                     end else begin
                         STATE <= IDLE;
@@ -65,7 +65,7 @@ module UART_RX #(parameter CLKS_PER_BIT = 104)
 
                 START_BIT:begin
                     if(BIT_CLK_COUNT == (CLKS_PER_BIT-1)/2)begin //checks if the start bit is still low in middle of section
-                        if(UART_RX == 1'b0)begin
+                        if(UART_RX_IN == 1'b0)begin
                             BIT_CLK_COUNT <= 0;
                             STATE <= DATA_BIT;
                         end else begin
@@ -85,7 +85,7 @@ module UART_RX #(parameter CLKS_PER_BIT = 104)
                         STATE <= DATA_BIT;
                     end else begin
                         BIT_CLK_COUNT <= 0;
-                        RX_BYTE[BIT_INDEX] <= UART_RX;
+                        RX_BYTE[BIT_INDEX] <= UART_RX_IN;
 
                         if (BIT_INDEX < 7)begin
                             BIT_INDEX <= BIT_INDEX + 1;
@@ -129,7 +129,15 @@ module UART_RX #(parameter CLKS_PER_BIT = 104)
     assign RX_DV = RX_REG_DV;
     assign RX_DATA = RX_BYTE;
 
-    //creates counter for bitCLK
+    //template
+    // UART_RX #(.CLKS_PER_BIT()) (
+    //     .clk(),
+    //     .rst(),
+    //     .UART_RX_IN(),
+    //     .RX_DATA(),
+    //     .RX_DV()
+
+    // );
 
 
 endmodule
